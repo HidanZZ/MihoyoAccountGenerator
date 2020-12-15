@@ -28,18 +28,8 @@ hr {
 }
 
 
-.spinner-parent {
-    position: fixed;
-    top: 50%;
-    left: 48%;
-}
 
-.spinner-border {
-    color: #fff !important;
-    border: 1em solid currentColor !important;
-    width: 4rem !important;
-    height: 4rem !important;
-    font-size: 4rem;
-}
+
+
 
 

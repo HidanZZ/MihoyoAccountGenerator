@@ -19,7 +19,9 @@ async def generate_account():
             ignoreHTTPSErrors=True, headless=True, handleSIGINT=False, handleSIGTERM=False, handleSIGHUP=False,
             args=["--no-sandbox"]
         )
+        print("browser created")
         page = await browser.newPage()
+        print("page created")
         await page.setCookie(cookie)
         await page.setViewport({"width": 1366, "height": 768})
         await page.goto("https://genshin.mihoyo.com/en/home", options={"waitUntil": "networkidle2"})
@@ -30,12 +32,15 @@ async def generate_account():
         mail = emailutil.generate()
         await page.keyboard.type(mail)
         await page.click(".input-inner-btn")
+        print(mail)
         code = emailutil.get_verification(mail)
         await page.click("input[placeholder='Verification Code']")
+        print(code)
         await page.keyboard.type(code)
         await page.click("input[placeholder='Password cannot be only numbers (8-15 characters)']")
 
         passwrd = passwordutil.get_pass()
+        print(passwrd)
         await page.keyboard.type(passwrd)
         await page.click("input[placeholder='Confirm Password']")
         await page.keyboard.type(passwrd)
