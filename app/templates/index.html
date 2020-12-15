@@ -99,12 +99,13 @@
         $('#results').hide();
         $('#services').height("inherit")
     }
+
     $(function () {
         $('.generate').on('click', function (e) {
             $('#wait').hide();
             $('#results').hide();
             $.ajax({
-                url: "http://0.0.0.0:5000/getAccount",
+                url: "http://0.0.0.0:{{ port }}/getAccount",
                 cache: false,
                 beforeSend: function () {
                     init();
