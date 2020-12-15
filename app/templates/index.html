@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Mihoyo Account Generator</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/Div-Overlay-Black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body id="page-top">
+<header class="masthead text-center text-white d-flex" id="header"
+        style="background: url(&quot;https://www.gensh.in/wallpaper/genshin/genshin_12_4K.jpg&quot;) center / cover no-repeat;">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="text-uppercase"><strong>Mihoyo account Generator</strong></h1>
+                <hr>
+            </div>
+        </div>
+        <div class="col-lg-8 mx-auto"><a class="btn btn-primary btn-xl js-scroll-trigger generate" role="button"
+                                         href="#services">generate</a></div>
+    </div>
+</header>
+<section id="about" style="background: rgb(40,40,40);">
+    <div class="container"></div>
+</section>
+<section id="services" style="background: rgb(40,40,40);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center d-flex justify-content-center">
+                <div id="wait">
+
+                    <h2 class="text-uppercase text-white mb-5"><strong>Waiting For Results</strong></h2>
+                    <section id="spinner" class="spinner-parent mt-3">
+                        <span class="spinner-border" style="color: #fff;height: 6rem;width: 6rem;" role="status"></span>
+                    </section>
+                    <div class="alertbar p-3 text-white"
+                         style="text-align:center;width:100%;background-color:rgb(224,77,70);font-family: 'Roboto 500','Open Sans' ">
+                        Please bear in mind that this will take ~35 seconds to finish and can even result in an error
+                        due to some server issues
+                    </div>
+                </div>
+                <div id="results">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading">Contact me</h2>
+                <hr class="my-4">
+                <p class="mb-5"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 ml-auto text-center"><i class="fa fa-github fa-3x mb-3 sr-contact" data-aos="zoom-in"
+                                                          data-aos-duration="300" data-aos-once="true"></i>
+                <p>github.com/HidanZZ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/bs-init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+<script src="../static/js/creative.js"></script>
+<script>
+    $('#wait').hide();
+    $('#results').hide();
+
+    function init() {
+        $('#wait').show();
+        $('#services').height("100vh");
+
+    }
+
+    function hide() {
+        $('#wait').hide();
+        $('#results').hide();
+        $('#services').height("inherit")
+    }
+    $(function () {
+        $('.generate').on('click', function (e) {
+            $('#wait').hide();
+            $('#results').hide();
+            $.ajax({
+                url: "http://127.0.0.1:5000/getAccount",
+                cache: false,
+                beforeSend: function () {
+                    init();
+                },
+                complete: function () {
+                    $('#wait').hide();
+
+                },
+                success: function (data) {
+                    let r = $('#results');
+                    r.show();
+                    if (data.err) {
+                        console.log(data)
+                        r.html('<h2 class="text-uppercase text-warning mb-5"><strong>Error !</strong></h2><h4 class="text-uppercase text-warning mb-5"><strong>' + data.err + '</strong></h4>' +
+                            '<div class="col-lg-8 mx-auto"><a class="btn btn-primary btn-xl js-scroll-trigger retry" style="background-color: rgb(255, 255, 255);color:rgb(40,40,40);" role="button" \n' +
+                            '                                       href="#header" onclick="hide()" >Retry</a></div>')
+
+                    } else {
+                        console.log(data)
+                        r.html('<h2 class="text-uppercase text-success mb-5"><strong>Done!</strong></h2>\n' +
+                            '                    <div class="card  my-4   ">\n' +
+                            '                        <div class="card-body text-left p-4 text-center" style="font-family: \'Roboto 500\',\'Open Sans\'">\n' +
+                            '                            <strong>Email : </strong>' + data.email + '\n' +
+                            '                            <br>\n' +
+                            '                            <strong>Password : </strong>' + data.password + '\n' +
+                            '                        </div>\n' +
+                            '                    </div>\n' +
+                            '                    <h3 class="text-uppercase text-success mb-5"><strong>Time Elapsed : </strong>' + data.time_elapsed + ' seconds</h3>')
+                        {#r.append($('<p class="text-white">' + data.email + '</p>'))#}
+                        {#r.append($('<p class="text-white">' + data.password + '</p>'))#}
+                        {#r.append($('<p class="text-white">' + data.time_elapsed + '</p>'))#}
+                    }
+
+                },
+                dataType: 'json'
+            });
+        });
+    });
+
+</script>
+</body>
+
+</html>

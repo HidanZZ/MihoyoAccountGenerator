@@ -1,0 +1,45 @@
+@media (min-width: 1200px) {
+    header.masthead h1 {
+        font-size: 3rem;
+    }
+}
+
+
+hr {
+    border-color: rgb(40, 40, 40);
+}
+
+.btn.btn-primary.btn-xl.js-scroll-trigger {
+    background-color: rgb(40, 40, 40);
+
+}
+
+#results.btn.btn-primary.btn-xl.js-scroll-trigger {
+    background-color: rgb(255, 255, 255);
+    color: rgb(40, 40, 40);
+    border-color: rgb(255, 255, 255) !important;
+
+}
+
+.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    color: rgb(40, 40, 40);
+    background-color: #fff !important;
+    border-color: rgb(40, 40, 40) !important;
+}
+
+
+.spinner-parent {
+    position: fixed;
+    top: 50%;
+    left: 48%;
+}
+
+.spinner-border {
+    color: #fff !important;
+    border: 1em solid currentColor !important;
+    width: 4rem !important;
+    height: 4rem !important;
+    font-size: 4rem;
+}
+
+
