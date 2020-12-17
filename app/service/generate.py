@@ -12,23 +12,20 @@ cookie = {"name": "isShownWholeAnimation", "value": "1", "domain": "genshin.miho
 
 
 async def test():
-    try:
-        print("started")
-        start = time.time()
-        browser = await launch(
-            ignoreHTTPSErrors=True, headless=True, handleSIGINT=False, handleSIGTERM=False, handleSIGHUP=False,
-            args=["--no-sandbox"]
-        )
-        print("browser created")
-        page = await browser.newPage()
-        print("page created")
-        await page.setCookie(cookie)
-        await page.setViewport({"width": 1366, "height": 768})
-        await page.goto("https://genshin.mihoyo.com/en/home", options={"waitUntil": "networkidle2"})
-        end = time.time()
-        return {"time": end - start}
-    except:
-        return {"msg": "Erreur"}
+    print("started")
+    start = time.time()
+    browser = await launch(
+        ignoreHTTPSErrors=True, headless=True, handleSIGINT=False, handleSIGTERM=False, handleSIGHUP=False,
+        args=["--no-sandbox"]
+    )
+    print("browser created")
+    page = await browser.newPage()
+    print("page created")
+    await page.setCookie(cookie)
+    await page.setViewport({"width": 1366, "height": 768})
+    await page.goto("https://genshin.mihoyo.com/en/home", options={"waitUntil": "networkidle2"})
+    end = time.time()
+    return {"time": end - start}
 
 
 async def generate_account():
